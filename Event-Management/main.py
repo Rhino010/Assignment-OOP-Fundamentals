@@ -12,7 +12,7 @@ Implement a method add_participant that increases the count and a method get_par
             self.name = name
             self.date = date
 """
-events = {}
+
 
 class Event:
     # Everything in the __init__ constructor is required in the class.
@@ -22,17 +22,17 @@ class Event:
         # This empty list will take participant names for each instance of the class.
         self.participants = []
     
-    def add_participant(self,participant_names):
+    def add_participant(self,participant_name):
         # This will append names to self.participants specifically as a value to the dictionary key[event]
-        self.participants.append(participant_names)
+        self.participants.append(participant_name)
         
 
     def get_participant_count(self):
         count = len(self.participants)
-        print(f"The total participants in this event are {count}")
+        return count
 
 def main():
-
+    events = {}
 
     while True:
 
@@ -41,27 +41,26 @@ def main():
         
         if choice == '1':
             
-            new_event = input("Please enter the new event name.\n")
+            new_event_name = input("Please enter the new event name.\n")
             event_date = input("Please enter the event date.\n")
-            event_people = input("Please enter participants attending the event separated by commas (ex. Jane, Donna).\n")
-            events[new_event] = Event(new_event, event_date)
-    
+            events[new_event_name] = Event(new_event_name, event_date)
+            print(events[new_event_name].event_name)
         
         elif choice == '2':
             event_name = input("Please type the name of the event you wish to add participants for.\n")
             if event_name in events:
-                event_people = input("Please type the people you would like to add to the event separated by commas (ex. Jim, John).\n")
-
+                participant_name = input("Please type the name you would like to add.\n")
+                events[event_name].add_participant(participant_name)
+                print(f"Participant {participant_name} has been added.")
             else:
                 print("Event not found.")
 
         elif choice == '3':
             event_name = input("Which event would you like the participant count for?\n")
             if event_name in events:
-                events[event_name] = event.get_participant_count()
+                print(f"The total people registered to attend this event is: {events[event_name].get_participant_count()}")
             else:
                 print("Event not found.")
-            print(events)
 
 
         elif choice == '4':
